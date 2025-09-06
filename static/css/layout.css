@@ -6,3 +6,7 @@
 html[data-theme] main {
     margin-top: var(--nav-height);
 }
+
+html[data-theme] * {
+    box-sizing: border-box;
+}

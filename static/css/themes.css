@@ -70,4 +70,16 @@ html[theme="light"] {
     --dis-border: #A4B7B6;
 }
 
+html[data-theme] header {
+    padding-left: 0;
+    padding-right: 0;
+}
 
+html[data-theme] nav {
+    color: var(--contrast-text);
+    background-color: var(--contrast-bg);
+}
+
+html[data-theme] .nav-link {
+    color: var(--contrast-text2);
+}

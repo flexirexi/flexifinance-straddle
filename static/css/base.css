@@ -1,0 +1,10 @@
+@import url("/static/css/themes.css");
+@import url("/static/css/layout.css");
+
+html[data-theme] header {
+    color: var(--contrast-title);
+}
+
+html[data-theme] .nav-link {
+    font-size: 20px;
+}

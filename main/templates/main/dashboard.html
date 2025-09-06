@@ -1,0 +1,86 @@
+{% extends "base.html" %} 
+{% load static %} 
+
+{% block page_header %}
+<link rel="stylesheet" href="{% static 'main/css/dashboard.css' %}" />
+{% endblock %} 
+
+{% block content %}
+<main class="container py-4">
+    <div class="row">
+        <!-- Card: Summary -->
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Strategies</h5>
+                    <p class="card-text text-muted mb-1">
+                    Anzahl hinterlegter Strategien
+                    </p>
+                    <div class="display-4 font-weight-bold" id="stat-strategies">—
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Runs -->
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Runs</h5>
+                    <p class="card-text text-muted mb-1">Gespeicherte Berechnungsläufe</p>
+                    <div class="display-4 font-weight-bold" id="stat-runs">—
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Last Update -->
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">Last Update</h5>
+                    <p class="card-text text-muted mb-1">
+                        Zeitpunkt letzte Aktualisierung
+                    </p>
+                    <div class="h3 font-weight-bold mb-0" id="stat-last-updated">—
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Platzhalter für weitere Widgets / Tabellen -->
+    <div class="row">
+        <div class="col-12 mb-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Recent Results</h5>
+                    <p class="card-text text-muted">
+                        Zuletzt gespeicherte Auswertungen (Top 10)
+                    </p>
+                    <div id="recent-results">
+                        <!-- später per Template/Context oder Fetch gefüllt -->
+                        <em>No data yet.</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %} 
+
+{% block extra_scripts %} 
+{{ block.super }}
+<script type="module">
+  // Beispielhafte Initialisierung (du füllst das später serverseitig)
+    document.getElementById("stat-strategies").textContent =
+    '{{ strategies_count|default:"—" }}';
+    document.getElementById("stat-runs").textContent =
+    '{{ runs_count|default:"—" }}';
+    document.getElementById("stat-last-updated").textContent =
+    '{{ last_updated|default:"—" }}';
+</script>
+{% endblock %}
