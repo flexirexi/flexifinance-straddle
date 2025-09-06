@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block meta %}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no" >
+    {% endblock %}
+
+    {% block extra_meta %} {% endblock %}
+
+    {% block core_css %}
+	<!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{% static 'img/logos/logo.svg' %}">
+    <!-- Bootsrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- base CSS (app specific) -->
+    <link rel="stylesheet" href="{% static 'app/css/base.css' %}">
+    {% endblock %}
+
+    {% block extra_css%}  {% endblock %}
+
+    <title>XXXX XXX {% block extra_title%} {% endblock %}</title>
+</head>
+<body>
+    <header class="container-fluid fixed-top">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'dashboard' %}">
+            <img src="{% static 'img/logo.svg' %}" alt="Logo" width="24" height="24" class="mr-2">
+            <span>FlexiFinance · CFD</span>
+        </a>
+
+        <!-- Burger -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar"
+                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse" id="mainNavbar">
+
+            <!-- Left: Menu -->
+            <ul class="navbar-nav mr-auto">
+            <!-- Dropdown "Menu" -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="menuDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Menu
+                </a>
+                <div class="dropdown-menu" aria-labelledby="menuDropdown">
+                {% if user.is_authenticated %}
+                    <a class="dropdown-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+                    href="{% url 'dashboard' %}">Dashboard</a>
+                {% endif %}
+
+                {% if user.is_staff or user.is_superuser %}
+                    <a class="dropdown-item {% if request.resolver_match.url_name == 'calculate' %}active{% endif %}"
+                    href="{% url 'calculate' %}">Calculate</a>
+                    <a class="dropdown-item {% if request.resolver_match.url_name == 'analysis' %}active{% endif %}"
+                    href="{% url 'analysis' %}">Analysis</a>
+                {% endif %}
+                </div>
+            </li>
+            </ul>
+
+            <!-- Right: User + Logout -->
+            <ul class="navbar-nav ml-auto align-items-center">
+            {% if user.is_authenticated %}
+                <li class="nav-item mr-2">
+                <span class="navbar-text">
+                    {{ user.username }}
+                </span>
+                </li>
+                <li class="nav-item">
+                <!-- Allauth Logout (POST) -->
+                <form method="post" action="{% url 'account_logout' %}" class="mb-0">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-light btn-sm" title="Logout">
+                    <i class="fas fa-power-off" aria-hidden="true"></i>
+                    <span class="sr-only">Logout</span>
+                    </button>
+                </form>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                </li>
+            {% endif %}
+            </ul>
+        </div>
+        </nav>
+    </header>
+
+    {% if messages %}
+    <div class="message-container">
+    </div>
+    {% endif %}
+
+    {% block page_header %} {% endblock %}
+    {% block content %} {% endblock %}
+
+    <!------ Optional JavaScript ------>
+    {% block extra_scripts %} 
+
+	<!-- language switcher -->
+	<script src="{% static 'js/lang.js' %}"></script>
+	
+	<!-- theme switcher -->
+	<script type="module" src="{% static 'js/theme.js' %}"></script>
+	
+	<!-- base.js script -->
+	<script type="module" src="{% static 'main/js/base.js' %}"></script>
+	{% endblock %}
+	
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    {% block core_scripts %} 
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    {% endblock %}
+</body>
+</html>
