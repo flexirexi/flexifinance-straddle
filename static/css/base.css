@@ -8,3 +8,12 @@ html[data-theme] header {
 html[data-theme] .nav-link {
     font-size: 20px;
 }
+
+html[data-theme] body {
+    background-color: var(--bg2);
+}
+
+html[data-theme] .card {
+    background-color: var(--bg);
+}
+

@@ -7,13 +7,13 @@
     --title-shadow: #000000d8;
     --accent: #ffbd09;
     --accent2: #ff9c12;
-    --link: #2b82de;
+    --link: #55a7fe;
     --bg: #f8f8f8;
     --bg2: #c9c9c9;     
 
     --contrast-text: #ffffff;
     --contrast-text2: #d2d2d2;
-    --contrast-title: #ffd966;
+    --contrast-title: #ffbd09;
     --contrast-title2: #ffffff;
     --contrast-bg: #0b183d; 
     --contrast-bg2: #1a3664;
@@ -82,4 +82,12 @@ html[data-theme] nav {
 
 html[data-theme] .nav-link {
     color: var(--contrast-text2);
+}
+
+html[data-theme] .contrast-text2 {
+    color: var(--contrast-text2);
+}
+
+html[data-theme] .contrast-title {
+    color: var(--contrast-title);
 }
